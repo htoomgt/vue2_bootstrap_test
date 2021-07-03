@@ -1,5 +1,10 @@
 # vue2-bootstrap-test
 
+## Tested Feature
+
+- bootstrap integration with vue
+- Vue router for different pages with active link css style
+
 ## Project setup
 ```
 npm install
