@@ -102,6 +102,11 @@
             </div>
             <div class="col-6"></div>
         </div>
+        <div class="row mt-4" >
+          <div class="col-6" >
+            <contacted-message-list :contactedMessages="contactedMessages"/>
+          </div>
+        </div>
     </div>
 </template>
 
@@ -110,18 +115,23 @@
 
 import { validationMixin } from "vuelidate";
 import { required, minLength, email } from "vuelidate/lib/validators";
+import ContactedMessageList from './ContactedMessageList.vue'
 
 export default {
   name:'ContactUs',
   mixins: [validationMixin],
-  data() {
+  components:{
+    ContactedMessageList
+  },
+  data: function() {
     return {      
       form: {
         name: null,
         email: null,
         subject: null,
         message: null,
-      }
+      },
+      contactedMessages: [],
     };
   },
   validations: {
@@ -161,9 +171,12 @@ export default {
         return;
       }
 
-      console.log(this.form)
+      this.contactedMessages.push(this.form);
       alert("Form submitted!");
       this.resetForm();
+      
+
+      console.log(this.contactedMessages);
     }
   }
 };
