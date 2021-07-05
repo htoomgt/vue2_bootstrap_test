@@ -6,9 +6,13 @@ import PortalVue from 'portal-vue'
 import router from './router/index.js'
 
 
+
+
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+
+
 
 // App Main Styles 
 import './assets/css/styles.css'
@@ -20,9 +24,13 @@ Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin)
 
+
 Vue.config.productionTip = false
 
 new Vue({
   render: h => h(App),
   router
 }).$mount('#app')
+
+
+

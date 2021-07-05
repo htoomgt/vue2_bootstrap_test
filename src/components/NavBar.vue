@@ -7,45 +7,55 @@
 
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
-        <router-link 
-          to="/" 
-          v-slot="{route }"
-        >
-          <li  @click="setActiveLink(route.path)" :class="[ activeLink.home ? 'active' : '', 'nav-item' ]" ><a  class='nav-link'> Home</a></li>
+        <li class="nav-item" >
+          <router-link            
+            v-on:click.native="setActiveLink($route.path)"
+            to="/"  
+            :class="[ activeLink.home ? 'active' : '', 'nav-link' ]" 
+          > 
+            Home
+          </router-link>
+        </li>
 
-        </router-link>
-        <!-- <b-link :to="{path : '/'}"> Home </b-link> -->
-        <router-link 
-          to="/about-us"          
-          v-slot="{route }"
-           
-        >
-          <li  @click="setActiveLink(route.path)" :class="[ activeLink.aboutUs ? 'active' : '', 'nav-item' ]" ><a class='nav-link'> About Us</a></li>
-          <!-- <b-nav-item :href="href" @click="setActiveLink(route.path)"  >About Us</b-nav-item> -->
-        </router-link>
-        
-        <router-link
-          to="/products"
-          v-slot="{ route }"
-          
-        >
-          <li  @click="setActiveLink(route.path)" :class="[ activeLink.products ? 'active' : '', 'nav-item' ]" ><a class='nav-link'> Products</a></li>
-        </router-link>
-        <router-link
-          to="/services"
-          v-slot="{ href, route }"
-          
-        >
-          <li  @click="setActiveLink(route.path)" :class="[ activeLink.services ? 'active' : '', 'nav-item' ]" ><a class='nav-link'> Services</a></li>
-        </router-link>
-        
-        <router-link
-          to="/contact-us"
-          v-slot="{ route }"
-         
-        > 
-          <li  @click="setActiveLink(route.path)" :class="[ activeLink.contactUs ? 'active' : '', 'nav-item' ]" ><a class='nav-link'> Contact Us</a></li>
-        </router-link>
+        <li class="nav-item">
+          <router-link 
+            v-on:click.native="setActiveLink($route.path)"
+            to="/about-us"  
+            :class="[ activeLink.aboutUs ? 'active' : '', 'nav-link' ]"
+          > 
+            About Us
+          </router-link>
+        </li>
+
+        <li class="nav-item">
+          <router-link 
+            to="/products" 
+            v-on:click.native="setActiveLink($route.path)" 
+            :class="[ activeLink.products ? 'active' : '', 'nav-link' ]"
+          > 
+            Products
+          </router-link>
+        </li>
+
+        <li class="nav-item">
+          <router-link 
+            to="/services"  
+            v-on:click.native="setActiveLink($route.path)" 
+            :class="[ activeLink.services ? 'active' : '', 'nav-link' ]"
+          > 
+            Services
+          </router-link>
+        </li>
+
+        <li class="nav-item">
+          <router-link 
+            to="/contact-us"  
+            v-on:click.native="setActiveLink($route.path)" 
+            :class="[ activeLink.contactUs ? 'active' : '', 'nav-link' ]"
+          > 
+            Contact Us
+          </router-link>
+        </li>
         
       </b-navbar-nav>
 
@@ -78,7 +88,8 @@
 </template>
 
 <script>
-import router from '../router/index.js'
+// import router from '../router/index.js'
+
 export default {
     name : 'NavBar',
     data : function(){
@@ -111,7 +122,7 @@ export default {
         }
 
         // alert('you hit the set active');
-        router.push({path : routePath})
+        // router.replace({path : routePath})
         switch (routePath){
           case  '/':            
             this.activeLink.home = true 
