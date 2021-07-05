@@ -14,14 +14,13 @@
                             <b-form-input
                                 id="example-input-1"
                                 name="example-input-1"
-                                v-model="$v.form.name.$model"
+                                v-model.trim="$v.form.name.$model"
                                 :state="validateState('name')"
                                 aria-describedby="input-1-live-feedback"
                             ></b-form-input>
 
                             <b-form-invalid-feedback id="input-1-live-feedback" v-if="!$v.form.name.required"
-                                >This is a required field.
-                                characters.</b-form-invalid-feedback
+                                >Please enter your name.</b-form-invalid-feedback
                             >
                             <b-form-invalid-feedback id="input-1-live-feedback2" v-if="!$v.form.name.minLength"
                                 >Must be at least 3
@@ -31,22 +30,65 @@
 
                         <b-form-group
                             id="example-input-group-2"
-                            label="Food"
+                            label="Email"
                             label-for="example-input-2"
                         >
-                            <b-form-select
+                            <b-form-input
                                 id="example-input-2"
                                 name="example-input-2"
-                                v-model="$v.form.food.$model"
-                                :options="foods"
-                                :state="validateState('food')"
+                                v-model="$v.form.email.$model"
+                                :state="validateState('email')"
                                 aria-describedby="input-2-live-feedback"
-                            ></b-form-select>
+                            ></b-form-input>
 
-                            <b-form-invalid-feedback id="input-2-live-feedback"
-                                >This is a required
-                                field.</b-form-invalid-feedback
+                            <b-form-invalid-feedback id="input-2-live-feedback" v-if="!$v.form.email.required"
+                                >Please enter your email</b-form-invalid-feedback
                             >
+                            <b-form-invalid-feedback id="input-2-live-feedback2" v-if="!$v.form.email.email"
+                                >Must be email format</b-form-invalid-feedback
+                            >
+                        </b-form-group>
+
+                        <b-form-group
+                            id="example-input-group-3"
+                            label="Subject"
+                            label-for="example-input-3"
+                        >
+                            <b-form-input
+                                id="example-input-3"
+                                name="example-input-3"
+                                v-model.trim="$v.form.subject.$model"
+                                :state="validateState('subject')"
+                                aria-describedby="input-3-live-feedback"
+                            ></b-form-input>
+
+                            <b-form-invalid-feedback id="input-3-live-feedback" v-if="!$v.form.subject.required"
+                                >Please enter subject</b-form-invalid-feedback
+                            >
+                            
+                        </b-form-group>
+
+                        <b-form-group
+                            id="example-input-group-4"
+                            label="Message"
+                            label-for="example-input-4"
+                        >
+                            <b-form-textarea
+                                id="example-input-4"
+                                name="example-input-4"
+                                v-model.trim="$v.form.message.$model"
+                                :state="validateState('message')"
+                                aria-describedby="input-4-live-feedback"
+                                rows="3"                                
+                            ></b-form-textarea>
+
+                            <b-form-invalid-feedback id="input-4-live-feedback" v-if="!$v.form.message.required"
+                                >Please enter message</b-form-invalid-feedback
+                            >
+                            <b-form-invalid-feedback id="input-4-live-feedback" v-if="!$v.form.message.minLength"
+                                >Please enter message at least 4 character</b-form-invalid-feedback
+                            >
+                            
                         </b-form-group>
 
                         <b-button type="submit" variant="primary"
@@ -67,32 +109,32 @@
 
 
 import { validationMixin } from "vuelidate";
-import { required, minLength } from "vuelidate/lib/validators";
+import { required, minLength, email } from "vuelidate/lib/validators";
 
 export default {
   name:'ContactUs',
   mixins: [validationMixin],
   data() {
-    return {
-      foods: [
-        { value: null, text: "Choose..." },
-        { value: "apple", text: "Apple" },
-        { value: "orange", text: "Orange" }
-      ],
+    return {      
       form: {
         name: null,
-        food: null
+        email: null,
+        subject: null,
+        message: null,
       }
     };
   },
   validations: {
-    form: {
-      food: {
-        required
-      },
+    form: {      
       name: {
         required,
         minLength: minLength(3)
+      },
+      email: { required, email },
+      subject : { required},
+      message : { 
+        required,
+        minLength: minLength(4)
       }
     }
   },
@@ -104,7 +146,9 @@ export default {
     resetForm() {
       this.form = {
         name: null,
-        food: null
+        email: null,
+        subject: null,
+        message: null,
       };
 
       this.$nextTick(() => {
@@ -117,7 +161,9 @@ export default {
         return;
       }
 
+      console.log(this.form)
       alert("Form submitted!");
+      this.resetForm();
     }
   }
 };
