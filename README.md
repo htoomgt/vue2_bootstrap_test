@@ -30,5 +30,5 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 
 ### Referenced
-- Validation with Vee validation (link)[https://jasonwatmore.com/post/2018/08/01/vuejs-veevalidate-form-validation-example]
-- Basic validation official doc (link)[https://vee-validate.logaretm.com/v4/tutorials/basics]
+- Validation with Vee validation [link](https://jasonwatmore.com/post/2018/08/01/vuejs-veevalidate-form-validation-example)
+- Basic validation official doc [link](https://vee-validate.logaretm.com/v4/tutorials/basics)
